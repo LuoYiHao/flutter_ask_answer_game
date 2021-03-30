@@ -32,7 +32,7 @@ class _Content extends State<Content> {
   String _newValue;
   var _count = 0;
   var _score = 100;
-  var _everyItem =  _score / list.length;
+  // var _everyItem =  _score / list.length;
 
   @override
   Widget build(BuildContext context) {
