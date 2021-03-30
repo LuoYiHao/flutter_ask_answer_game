@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="flutter_ask_answer_game"
+        android:label="问答游戏"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -19,7 +19,7 @@ class _GameOver extends State<GameOver> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-           children: <Widget>[
+            children: <Widget>[
               Image.asset('assets/images/gameover.png',width: 100,height: 100,),
               Container(
                 child:Text('游戏结束',style: TextStyle(
@@ -33,13 +33,30 @@ class _GameOver extends State<GameOver> {
                 onPressed: (){
                   Navigator.pop(context,true);
                 },
-                child: Text("重新开始游戏",style: TextStyle(
-                  fontSize: 20
-                ),),
-                color: Colors.greenAccent,
-                textColor: Colors.blue,
+                textColor: Colors.white,
+                clipBehavior: Clip.hardEdge,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(22.0))),
+                  padding: const EdgeInsets.all(0.0),
+                  child: Container(
+                    width: 260,
+                    height: 44,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xff25D1D1),
+                          Color(0xff3BE6AD),
+                          Color(0xff20DDAA)
+                        ],
+                      ),
+                    ),
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text('重新开始游戏')),
+                  ),
               )
-           ],
+            ],
         )
       )
     );

@@ -3,33 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 import 'common.dart';
+import 'data.dart';
 import 'gameOver.dart';
 
 void main() => runApp(new MyApp());
-
-var list = [
-  {
-    "question":"喵喵喵？",
-    "answerA":'喵',
-    "answerB":'汪',
-    "answerC":'呀',
-    "rightAnswer":'喵'
-  },
-  {
-    "question":'啊',
-    "answerA":'老鼠',
-    "answerB":'龙猫',
-    "answerC":'土拨鼠',
-    "rightAnswer":'土拨鼠'
-  },
-  {
-    "question":'你是谁？',
-    "answerA":'我就是你',
-    "answerB":'我就是我',
-    "answerC":'我就是他',
-    "rightAnswer":'我就是我'
-  },
-];
 
 class MyApp extends StatelessWidget {
   @override
@@ -54,6 +31,8 @@ class Content extends StatefulWidget {
 class _Content extends State<Content> {
   String _newValue;
   var _count = 0;
+  var _score = 100;
+  var _everyItem =  _score / list.length;
 
   @override
   Widget build(BuildContext context) {

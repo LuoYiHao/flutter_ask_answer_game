@@ -1,0 +1,37 @@
+var list = [
+  {
+    "question":"打蛇打七寸，七寸指____",
+    "answerA":'咽喉',
+    "answerB":'心脏',
+    "answerC":'头部',
+    "rightAnswer":'心脏'
+  },
+  {
+    "question":'“读书有三到，谓心到，眼到，口到。”名言作者：_____',
+    "answerA":'颜真卿',
+    "answerB":'韩愈',
+    "answerC":'朱熹',
+    "rightAnswer":'朱熹'
+  },
+  {
+    "question":'北美五大湖的成因是____',
+    "answerA":'冰川侵蚀',
+    "answerB":'地壳断裂、凹陷',
+    "answerC":'流水侵蚀',
+    "rightAnswer":'冰川侵蚀'
+  },
+  {
+    "question":'完整的计算机系统包括：_____',
+    "answerA":'硬件系统、软件系统',
+    "answerB":'系统软件、应用软件',
+    "answerC":'计算机及其外部设备',
+    "rightAnswer":'计算机及其外部设备'
+  },
+  {
+    "question":'中国最早的叙事诗是____',
+    "answerA":'《孔雀东南飞》',
+    "answerB":'《长恨歌》',
+    "answerC":'《洛神赋》',
+    "rightAnswer":'《孔雀东南飞》'
+  },
+];
