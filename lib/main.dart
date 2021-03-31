@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'common.dart';
 import 'data.dart';
 import 'gameOver.dart';
@@ -31,8 +32,8 @@ class Content extends StatefulWidget {
 class _Content extends State<Content> {
   String _newValue;
   var _count = 0;
-  var _score = 100;
-  // var _everyItem =  _score / list.length;
+  static double _score = 100;
+  var _everyItem =  _score / list.length;
 
   @override
   Widget build(BuildContext context) {
@@ -105,14 +106,20 @@ class _Content extends State<Content> {
               _count=_count + 1;
             });
             if(_count == list.length){
-                Navigator.of(context).push(new MaterialPageRoute(builder: (_)=>GameOver()),).then((val)=>val?reload():null);
-                setState(() {
+              saveScore();
+              Navigator.of(context).push(new MaterialPageRoute(builder: (_)=>GameOver()),).then((val)=>val?reload():null);
+              setState(() {
                 _count=_count - 1;
               });
             }
           });
         }else{
           showErrorToast("回答错误");
+          if(_score > 0){
+            setState(() {
+              _score = _score - _everyItem;
+            });
+          }
         }
       }
     });
@@ -121,6 +128,12 @@ class _Content extends State<Content> {
   reload(){
     setState(() {
       _count = 0;
+      _score = 100;
     });
+  }
+
+  saveScore() async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setDouble('score', _score);
   }
 }

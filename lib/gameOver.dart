@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'common.dart';
 
 class GameOver extends StatefulWidget {
@@ -9,9 +10,11 @@ class GameOver extends StatefulWidget {
 }
 
 class _GameOver extends State<GameOver> {
+  double _score;
 
   @override
   Widget build(BuildContext context) {
+    getScore();
     return Scaffold(
       appBar: AppBar(
         title: Text('游戏结束'),
@@ -23,6 +26,14 @@ class _GameOver extends State<GameOver> {
               Image.asset('assets/images/gameover.png',width: 100,height: 100,),
               Container(
                 child:Text('游戏结束',style: TextStyle(
+                  fontSize: 40,
+                  color: Colors.green
+                  ),
+                ),
+                margin: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 20.0),
+              ),
+              Container(
+                child:Text('您的分数为：${_score}',style: TextStyle(
                   fontSize: 40,
                   color: Colors.green
                   ),
@@ -60,5 +71,14 @@ class _GameOver extends State<GameOver> {
         )
       )
     );
+  }
+
+  getScore() async{
+    final prefs = await SharedPreferences.getInstance();
+    final score = prefs.getDouble('score') ?? 0;
+    print(score);
+    setState(() {
+      _score = score;
+    });
   }
 }
