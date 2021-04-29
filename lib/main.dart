@@ -34,6 +34,7 @@ class _Content extends State<Content> {
   var _count = 0;
   static double _score = 100;
   var _everyItem =  _score / list.length;
+  String _time = DateTime.now().toString();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,9 @@ class _Content extends State<Content> {
         title: Text('问题${_count+1}'),
       ),
       body: Container(
-        child: Column(
+        child:ListView(
+        children: <Widget>[
+        Column(
           children: <Widget>[
             Container(
               child:Text(list[_count]['question'],style: TextStyle(
@@ -86,10 +89,21 @@ class _Content extends State<Content> {
                     changeItem(value);
                   },
                 ),
+                RadioListTile<String>(
+                  value: list[_count]["answerD"],
+                  title: Text(list[_count]["answerD"],style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.blueAccent
+                  )),
+                  groupValue: _newValue,
+                  onChanged: (value){
+                    changeItem(value);
+                  },
+                ),
               ],
             ),
           ],
-        ),
+        )]),
       )
     );
   }
@@ -98,12 +112,13 @@ class _Content extends State<Content> {
     setState(() {
       _newValue = value;
       if(_count < list.length){
-        if(list[_count]["rightAnswer"] == _newValue){
+        if(list[_count]["rightAnswer"] == value){
           showCorrectToast("回答正确");
           const timeout = const Duration(seconds: 2);
           Timer(timeout, (){
             setState(() {
               _count=_count + 1;
+              _newValue = 'null';
             });
             if(_count == list.length){
               saveScore();
@@ -135,5 +150,6 @@ class _Content extends State<Content> {
   saveScore() async{
     final prefs = await SharedPreferences.getInstance();
     prefs.setDouble('score', _score);
+    prefs.setString('time', _time);
   }
 }
