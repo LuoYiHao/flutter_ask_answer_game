@@ -49,8 +49,8 @@ class _Content extends State<Content> {
           children: <Widget>[
             Container(
               child:Text(list[_count]['question'],style: TextStyle(
-                fontSize: 30,
-                color: Colors.greenAccent
+                fontSize: 20,
+                color: Colors.black
               )),
               margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 20.0),
             ),
@@ -59,8 +59,8 @@ class _Content extends State<Content> {
                 RadioListTile<String>(
                   value: list[_count]["answerA"],
                   title: Text(list[_count]["answerA"],style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.blueAccent
+                    fontSize: 20,
+                    color: Colors.black
                   )),
                   groupValue: _newValue,
                   onChanged: (value) {
@@ -70,8 +70,8 @@ class _Content extends State<Content> {
                 RadioListTile<String>(
                   value: list[_count]["answerB"],
                   title: Text(list[_count]["answerB"],style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.blueAccent
+                    fontSize: 20,
+                    color: Colors.black
                   )),
                   groupValue: _newValue,
                   onChanged: (value) {
@@ -81,8 +81,8 @@ class _Content extends State<Content> {
                 RadioListTile<String>(
                   value: list[_count]["answerC"],
                   title: Text(list[_count]["answerC"],style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.blueAccent
+                    fontSize: 20,
+                    color: Colors.black
                   )),
                   groupValue: _newValue,
                   onChanged: (value){
@@ -92,8 +92,8 @@ class _Content extends State<Content> {
                 RadioListTile<String>(
                   value: list[_count]["answerD"],
                   title: Text(list[_count]["answerD"],style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.blueAccent
+                    fontSize: 20,
+                    color: Colors.black
                   )),
                   groupValue: _newValue,
                   onChanged: (value){
@@ -144,6 +144,7 @@ class _Content extends State<Content> {
     setState(() {
       _count = 0;
       _score = 100;
+      _time = DateTime.now().toString();
     });
   }
 
