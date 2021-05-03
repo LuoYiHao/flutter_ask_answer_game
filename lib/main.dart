@@ -54,57 +54,34 @@ class _Content extends State<Content> {
               margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 20.0),
             ),
             Column(
-              children: <Widget>[
-                RadioListTile<String>(
-                  value: list[_count]["answerA"],
-                  title: Text(list[_count]["answerA"],style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black
-                  )),
-                  groupValue: _newValue,
-                  onChanged: (value) {
-                    changeItem(value);
-                  },
-                ),
-                RadioListTile<String>(
-                  value: list[_count]["answerB"],
-                  title: Text(list[_count]["answerB"],style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black
-                  )),
-                  groupValue: _newValue,
-                  onChanged: (value) {
-                    changeItem(value);
-                  },
-                ),
-                RadioListTile<String>(
-                  value: list[_count]["answerC"],
-                  title: Text(list[_count]["answerC"],style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black
-                  )),
-                  groupValue: _newValue,
-                  onChanged: (value){
-                    changeItem(value);
-                  },
-                ),
-                RadioListTile<String>(
-                  value: list[_count]["answerD"],
-                  title: Text(list[_count]["answerD"],style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black
-                  )),
-                  groupValue: _newValue,
-                  onChanged: (value){
-                    changeItem(value);
-                  },
-                ),
-              ],
+              children:generateOptions()
             ),
           ],
         )]),
       )
     );
+  }
+
+  List<Widget> generateOptions(){
+    List<Widget> _optionList = [];
+    var problem = list[_count];
+    var options = problem['options'].split(",");
+    for(var option in options){
+      _optionList.add(
+        RadioListTile<String>(
+          value: option,
+          title: Text(option,style: TextStyle(
+            fontSize: 20,
+            color: Colors.black
+          )),
+          groupValue: _newValue,
+          onChanged: (value) {
+            changeItem(value);
+          },
+        )
+      );
+    }
+    return _optionList;
   }
 
   changeItem(String value) {

@@ -30,14 +30,17 @@ class _GameOver extends State<GameOver> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset('assets/images/gameover.png',width: 100,height: 100,),
+                  Container(
+                    child:Image.asset('assets/images/gameover.png',width: 100,height: 100,),
+                    margin: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0)
+                  ),
                   Container(
                     child:Text('游戏结束',style: TextStyle(
                       fontSize: 30,
                       color: Colors.green
                       ),
                     ),
-                    margin: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+                    margin: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0)
                   ),
                   Container(
                     child:Text('您的分数为：$_score',style: TextStyle(
@@ -45,7 +48,7 @@ class _GameOver extends State<GameOver> {
                       color: Colors.green
                       ),
                     ),
-                    margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+                    margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0)
                   ),
                   Container(
                     child:Text('所花时间为：${_seconds}s',style: TextStyle(
@@ -53,7 +56,7 @@ class _GameOver extends State<GameOver> {
                       color: Colors.green
                       ),
                     ),
-                    margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 50.0),
+                    margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 50.0)
                   ),
                   RaisedButton(
                     onPressed: (){
