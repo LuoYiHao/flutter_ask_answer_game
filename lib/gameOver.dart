@@ -53,7 +53,7 @@ class _GameOver extends State<GameOver> {
                       color: Colors.green
                       ),
                     ),
-                    margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+                    margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 50.0),
                   ),
                   RaisedButton(
                     onPressed: (){

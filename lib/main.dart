@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'common.dart';
 import 'data.dart';
@@ -121,7 +120,7 @@ class _Content extends State<Content> {
               _newValue = 'null';
             });
             if(_count == list.length){
-              saveScore();
+              saveScoreAndStartTime();
               Navigator.of(context).push(new MaterialPageRoute(builder: (_)=>GameOver()),).then((val)=>val?reload():null);
               setState(() {
                 _count=_count - 1;
@@ -148,7 +147,7 @@ class _Content extends State<Content> {
     });
   }
 
-  saveScore() async{
+  saveScoreAndStartTime() async{
     final prefs = await SharedPreferences.getInstance();
     prefs.setDouble('score', _score);
     prefs.setString('time', _time);
