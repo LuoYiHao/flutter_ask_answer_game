@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ask_answer_game/settings.dart';
+import 'settings.dart';
 import 'start_quiz.dart';
 
 class BottomTabBar extends StatefulWidget {

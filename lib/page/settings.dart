@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ask_answer_game/global.dart';
+import 'package:flutter_ask_answer_game/common/global.dart';
 
 class Settings extends StatefulWidget {
   @override

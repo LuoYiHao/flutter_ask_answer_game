@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'common.dart';
+import 'package:flutter_ask_answer_game/common/common.dart';
 import 'quiz_over.dart';
-import 'option.dart';
-import 'data.dart';
-import 'global.dart';
+import 'package:flutter_ask_answer_game/common/option.dart';
+import 'package:flutter_ask_answer_game/common/data.dart';
+import 'package:flutter_ask_answer_game/common/global.dart';
 
 class AskAnswerQuiz extends StatefulWidget {
   @override

@@ -1,4 +1,4 @@
-import 'bottom_tab_bar.dart';
+import 'package:flutter_ask_answer_game/page/bottom_tab_bar.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());

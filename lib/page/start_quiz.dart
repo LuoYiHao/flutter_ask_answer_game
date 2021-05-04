@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'ask_answer_quiz.dart';
-import 'data.dart';
 
 
 class StartQuiz extends StatefulWidget {
