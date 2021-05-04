@@ -17,9 +17,9 @@ class _SettingsState extends State<Settings> {
         margin: EdgeInsets.fromLTRB(30, 50, 0, 0),
         child: Column(
           children: [
-            Text('是否更换题目顺序'),
-            Switch(
-              value: isChangeQuizOrder, 
+            SwitchListTile(
+              value: isChangeQuizOrder,
+              title: Text('是否更换题目顺序'),
               onChanged: (value){
                 setState(() {
                   isChangeQuizOrder = value;
@@ -27,9 +27,9 @@ class _SettingsState extends State<Settings> {
                 });
               }
             ),
-            Text('是否更换选项顺序'),
-            Switch(
+            SwitchListTile(
               value: isChangeOptionOrder, 
+              title: Text('是否更换选项顺序'),
               onChanged: (value){
                 setState(() {
                   isChangeOptionOrder = value;
