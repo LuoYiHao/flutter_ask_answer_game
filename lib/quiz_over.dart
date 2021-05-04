@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class GameOver extends StatefulWidget {
+class QuizOver extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _GameOver();
+    return _QuizOver();
   }
 }
 
-class _GameOver extends State<GameOver> {
+class _QuizOver extends State<QuizOver> {
   double _score;
   String _seconds;
   var execute = true;
@@ -21,7 +21,7 @@ class _GameOver extends State<GameOver> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('游戏结束'),
+        title: Text('竞赛结束'),
       ),
       body: Center(
         child: ListView(
@@ -34,7 +34,7 @@ class _GameOver extends State<GameOver> {
                     margin: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0)
                   ),
                   Container(
-                    child:Text('游戏结束',style: TextStyle(
+                    child:Text('竞赛结束',style: TextStyle(
                       fontSize: 30,
                       color: Colors.green
                       ),
@@ -82,7 +82,7 @@ class _GameOver extends State<GameOver> {
                       padding: const EdgeInsets.all(10.0),
                       child: Container(
                         alignment: Alignment.center,
-                        child: Text('重新开始游戏')),
+                        child: Text('重新开始竞赛')),
                     ),
                   )
                 ],
