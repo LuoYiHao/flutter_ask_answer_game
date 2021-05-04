@@ -2,9 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'common.dart';
-import 'data.dart';
 import 'quiz_over.dart';
 import 'option.dart';
+import 'data.dart';
+import 'global.dart';
 
 class AskAnswerQuiz extends StatefulWidget {
   @override
@@ -17,10 +18,10 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
   String _radioVal;
   var _count = 0;
   static double _score = 100;
-  var _everyItem =  _score / list.length;
   String _time = DateTime.now().toString();
   List<Option> _checkboxOptions = List();
   List<String> selName = List();
+  List list = List();
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +87,7 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
   handleAnswerWrong(){
     showErrorToast("回答错误");
     if(_score > 0){
+      var _everyItem =  _score / list.length;
       setState(() {
         _score = _score - _everyItem;
       });
@@ -107,6 +109,9 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
 
   @override
   void initState(){
+    list = Global.isChangeQuizOrder?shuffle(arr):arr;
+    print('initState');
+    print(Global.isChangeQuizOrder);
     retsetCheckboxOptions();
   }
 
@@ -147,6 +152,12 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
       _radioOptions = problem['options'].split(",");
     }
 
+print(2234343);
+    //打乱选项
+    if(Global.isChangeOptionOrder){
+      _radioOptions = shuffle(_radioOptions);
+    }
+
     Widget tile;
     if(problem['type']=='radio'){
       for(var option in _radioOptions){
@@ -164,7 +175,6 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
         _optionList.add(tile);
       }
     }else if(problem['type']=='checkbox'){
-      print(_checkboxOptions);
       for(var option in _checkboxOptions){
         tile = CheckboxListTile(
           title: Text(option.title),

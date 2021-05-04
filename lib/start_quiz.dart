@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'ask_answer_quiz.dart';
+import 'data.dart';
+
 
 class StartQuiz extends StatefulWidget {
   @override
@@ -7,6 +9,13 @@ class StartQuiz extends StatefulWidget {
 }
 
 class _StartQuizState extends State<StartQuiz> {
+  List list;
+  @override
+  void initState() {
+    list = list;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(

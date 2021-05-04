@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:math';
+import 'package:shared_preferences/shared_preferences.dart';
 
 showErrorToast(String msg){
   Fluttertoast.showToast(
@@ -34,11 +35,33 @@ int getRandomInt(var min,var max){
 
 //打乱数组
 shuffle(List arr){
-	for (var i = 1; i < arr.length; i++){
+  List newArr = List();
+  newArr.addAll(arr);
+	for (var i = 1; i < newArr.length; i++){
 		var j = getRandomInt(0,i);
-		var t = arr[i];
-		arr[i] = arr[j];
-		arr[j] = t;
+		var t = newArr[i];
+		newArr[i] = newArr[j];
+		newArr[j] = t;
 	}
-	return arr;
+	return newArr;
+}
+
+getSharedPreferences(key,type) async{
+  final prefs = await SharedPreferences.getInstance();
+  switch(type){
+    case 'bool':
+      final bool value = prefs.getBool(key) ?? true;
+      return value;
+  }
+}
+
+processData(arr) async{
+  var res;
+  bool isChangeQuizOrder = await getSharedPreferences('isChangeQuizOrder','bool');
+  if(isChangeQuizOrder){
+    res = shuffle(arr);
+  }else{
+    res = arr;
+  }
+  return res;
 }

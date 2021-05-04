@@ -1,4 +1,3 @@
-import 'common.dart';
 var arr = [
   {
     "question":"“从群众中来，到群众中去。”最早是由（）提出的。",
@@ -359,5 +358,3 @@ var arr = [
     "type":"checkbox",
   },
 ];
-
-var list = shuffle(arr);

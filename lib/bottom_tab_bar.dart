@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ask_answer_game/settings.dart';
 import 'start_quiz.dart';
 
 class BottomTabBar extends StatefulWidget {
@@ -14,9 +15,7 @@ class _BottomTabBarState extends State<BottomTabBar>{
   @override
   void initState(){
     list..add(StartQuiz())
-    ..add(StartQuiz())
-    ..add(StartQuiz())
-    ..add(StartQuiz());
+    ..add(Settings());
     super.initState();
   }
 
