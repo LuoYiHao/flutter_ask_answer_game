@@ -27,16 +27,16 @@ class _SettingsState extends State<Settings> {
                 });
               }
             ),
-            // Text('是否更换选项顺序'),
-            // Switch(
-            //   value: isChangeOptionOrder, 
-            //   onChanged: (value){
-            //     setState(() {
-            //       isChangeOptionOrder = value;
-            //       Global.isChangeOptionOrder = value;
-            //     });
-            //   }
-            // ),
+            Text('是否更换选项顺序'),
+            Switch(
+              value: isChangeOptionOrder, 
+              onChanged: (value){
+                setState(() {
+                  isChangeOptionOrder = value;
+                  Global.isChangeOptionOrder = value;
+                });
+              }
+            ),
           ],
         ),
       )

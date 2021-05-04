@@ -23,6 +23,10 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
   List<String> selName = List();
   List list = List();
 
+  var _tmpCount = -1;
+  var radioShuffleOptions = [];
+  List checkboxShuffleOptions = List();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +73,7 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
     const timeout = const Duration(seconds: 2);
     Timer(timeout, (){
       setState(() {
-        _count=_count + 1;
+        _count = _count + 1;
         _radioVal = '';
       });
       
@@ -152,14 +156,16 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
       _radioOptions = problem['options'].split(",");
     }
 
-print(2234343);
-    //打乱选项
-    if(Global.isChangeOptionOrder){
-      _radioOptions = shuffle(_radioOptions);
-    }
-
     Widget tile;
     if(problem['type']=='radio'){
+      //打乱选项
+      if(Global.isChangeOptionOrder){
+        if(_tmpCount != _count){
+          _tmpCount = _count;
+          radioShuffleOptions = shuffle(_radioOptions);
+        }
+      _radioOptions = radioShuffleOptions;
+      }
       for(var option in _radioOptions){
         tile = RadioListTile<String>(
           value: option,
@@ -175,6 +181,18 @@ print(2234343);
         _optionList.add(tile);
       }
     }else if(problem['type']=='checkbox'){
+      print(_tmpCount);
+      print(_count);
+      if(Global.isChangeOptionOrder && _tmpCount != _count){
+        _tmpCount = _count;
+        checkboxShuffleOptions = shuffle(_checkboxOptions);
+        _checkboxOptions = List();
+        for(var option in checkboxShuffleOptions){
+          print(option.title);
+          print(option.isRight);
+          _checkboxOptions.add(option);
+        }
+      }
       for(var option in _checkboxOptions){
         tile = CheckboxListTile(
           title: Text(option.title),
