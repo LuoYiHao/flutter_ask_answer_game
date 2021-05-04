@@ -1,10 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'common.dart';
 import 'data.dart';
 import 'gameOver.dart';
+import 'option.dart';
 
 void main() => runApp(new MyApp());
 
@@ -29,11 +29,13 @@ class Content extends StatefulWidget {
 }
 
 class _Content extends State<Content> {
-  String _newValue;
+  String _radioVal;
   var _count = 0;
   static double _score = 100;
   var _everyItem =  _score / list.length;
   String _time = DateTime.now().toString();
+  List<Option> _checkboxOptions = List();
+  List<String> selName = List();
 
   @override
   Widget build(BuildContext context) {
@@ -62,60 +64,6 @@ class _Content extends State<Content> {
     );
   }
 
-  List<Widget> generateOptions(){
-    List<Widget> _optionList = [];
-    var problem = list[_count];
-    var options = problem['options'].split(",");
-    for(var option in options){
-      _optionList.add(
-        RadioListTile<String>(
-          value: option,
-          title: Text(option,style: TextStyle(
-            fontSize: 20,
-            color: Colors.black
-          )),
-          groupValue: _newValue,
-          onChanged: (value) {
-            changeItem(value);
-          },
-        )
-      );
-    }
-    return _optionList;
-  }
-
-  changeItem(String value) {
-    setState(() {
-      _newValue = value;
-      if(_count < list.length){
-        if(list[_count]["rightAnswer"] == value){
-          showCorrectToast("回答正确");
-          const timeout = const Duration(seconds: 2);
-          Timer(timeout, (){
-            setState(() {
-              _count=_count + 1;
-              _newValue = 'null';
-            });
-            if(_count == list.length){
-              saveScoreAndStartTime();
-              Navigator.of(context).push(new MaterialPageRoute(builder: (_)=>GameOver()),).then((val)=>val?reload():null);
-              setState(() {
-                _count=_count - 1;
-              });
-            }
-          });
-        }else{
-          showErrorToast("回答错误");
-          if(_score > 0){
-            setState(() {
-              _score = _score - _everyItem;
-            });
-          }
-        }
-      }
-    });
-  }
-
   reload(){
     setState(() {
       _count = 0;
@@ -128,5 +76,172 @@ class _Content extends State<Content> {
     final prefs = await SharedPreferences.getInstance();
     prefs.setDouble('score', _score);
     prefs.setString('time', _time);
+  }
+
+  handleAnswerRight(){
+    showCorrectToast("回答正确");
+    const timeout = const Duration(seconds: 2);
+    Timer(timeout, (){
+      setState(() {
+        _count=_count + 1;
+        _radioVal = '';
+      });
+      
+      if(_count == list.length){
+        saveScoreAndStartTime();
+        Navigator.of(context).push(new MaterialPageRoute(builder: (_)=>GameOver()),).then((val)=>val?reload():null);
+        setState(() {
+          _count = _count - 1;
+        });
+      }
+      retsetCheckboxOptions();
+    });
+  }
+
+  handleAnswerWrong(){
+    showErrorToast("回答错误");
+    if(_score > 0){
+      setState(() {
+        _score = _score - _everyItem;
+      });
+    }
+  }
+
+  changeItem(String value) {
+    setState(() {
+      _radioVal = value;
+      if(_count < list.length){
+        if(list[_count]["rightAnswer"] == value){
+          handleAnswerRight();
+        }else{
+          handleAnswerWrong();
+        }
+      }
+    });
+  }
+
+  @override
+  void initState(){
+    retsetCheckboxOptions();
+  }
+
+  retsetCheckboxOptions(){
+    var problem = list[_count];
+    if(problem['type']=='checkbox'){
+      setState(() {
+        _checkboxOptions = List();
+        for(var item in problem['options']){
+          Option option = Option();
+          option.title = item['title'];
+          option.isRight = item['isRight'];
+          _checkboxOptions.add(option);
+        }
+      });
+    }
+  }
+  
+  bool confirmAnswer(){
+    for(var item in _checkboxOptions){
+      if(item.isRight&&item.isSelected){
+        continue;
+      }else if(!item.isRight&&!item.isSelected){
+        continue;
+      }else{
+        return false;
+      }
+    }
+    return true;
+  }
+
+  List<Widget> generateOptions(){
+    List<Widget> _optionList = [];
+    var problem = list[_count];
+    var _radioOptions = [];
+
+    if(problem['type']=='radio'){
+      _radioOptions = problem['options'].split(",");
+    }
+
+    Widget tile;
+    if(problem['type']=='radio'){
+      for(var option in _radioOptions){
+        tile = RadioListTile<String>(
+          value: option,
+          title: Text(option,style: TextStyle(
+            fontSize: 20,
+            color: Colors.black
+          )),
+          groupValue: _radioVal,
+          onChanged: (value) {
+            changeItem(value);
+          },
+        );
+        _optionList.add(tile);
+      }
+    }else if(problem['type']=='checkbox'){
+      print(_checkboxOptions);
+      for(var option in _checkboxOptions){
+        tile = CheckboxListTile(
+          title: Text(option.title),
+          value: option.isSelected, 
+          onChanged: (value) {
+            print(value);
+            setState(() {
+              option.isSelected = value;
+              if(option.isSelected){
+                if(!selName.contains(option.title))
+                  selName.add(option.title);
+              }
+              else{
+                if(selName!=null && selName.contains(option.title))
+                  selName.remove(option.title);
+              }
+            });
+          },
+        );
+        _optionList.add(tile);
+      }
+    }
+
+    if(problem['type']=='checkbox'){
+      var btn = Container(
+        margin: const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 0.0),
+        child: RaisedButton(
+          onPressed: (){
+            print(selName);
+            if(confirmAnswer()){
+              handleAnswerRight();
+            }else{
+              handleAnswerWrong();
+            }
+          },
+          textColor: Colors.white,
+          clipBehavior: Clip.hardEdge,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(22.0))
+          ),
+          padding: const EdgeInsets.all(0.0),
+          child: Container(
+            width: 260,
+            height: 44,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: <Color>[
+                  Color(0xff25D1D1),
+                  Color(0xff3BE6AD),
+                  Color(0xff20DDAA)
+                ],
+              ),
+            ),
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              alignment: Alignment.center,
+              child: Text('提交')),
+          ),
+        )
+      );
+      _optionList.add(btn);
+    }
+    return _optionList;
   }
 }

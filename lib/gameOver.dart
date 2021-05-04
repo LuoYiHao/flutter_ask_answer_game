@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'common.dart';
 
 class GameOver extends StatefulWidget {
   @override
@@ -65,25 +64,26 @@ class _GameOver extends State<GameOver> {
                     textColor: Colors.white,
                     clipBehavior: Clip.hardEdge,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(22.0))),
-                      padding: const EdgeInsets.all(0.0),
-                      child: Container(
-                        width: 260,
-                        height: 44,
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xff25D1D1),
-                              Color(0xff3BE6AD),
-                              Color(0xff20DDAA)
-                            ],
-                          ),
+                      borderRadius: BorderRadius.all(Radius.circular(22.0))
+                    ),
+                    padding: const EdgeInsets.all(0.0),
+                    child: Container(
+                      width: 260,
+                      height: 44,
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Color(0xff25D1D1),
+                            Color(0xff3BE6AD),
+                            Color(0xff20DDAA)
+                          ],
                         ),
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: Text('重新开始游戏')),
                       ),
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text('重新开始游戏')),
+                    ),
                   )
                 ],
             )
@@ -95,13 +95,14 @@ class _GameOver extends State<GameOver> {
 
   getScoreAndTime() async{
     final prefs = await SharedPreferences.getInstance();
-    final score = prefs.getDouble('score') ?? 0;
+    final double score = prefs.getDouble('score') ?? 0;
     final startTimeStr = prefs.getString('time') ?? 0;
     var startTime = DateTime.parse(startTimeStr);
     var endTime = DateTime.now();
     var seconds = endTime.difference(startTime).inSeconds.toString();
+    print(score.runtimeType.toString());
     setState(() {
-      _score = score;
+      _score = double.parse(score.toStringAsFixed(2));
       _seconds = seconds;
     });
   }
