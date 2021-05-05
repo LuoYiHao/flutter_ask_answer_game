@@ -40,9 +40,8 @@ class _StartQuizState extends State<StartQuiz> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: <Color>[
-                Color(0xff25D1D1),
-                Color(0xff3BE6AD),
-                Color(0xff20DDAA)
+                Color(0xff6FB2FF),
+                Color(0xff095FFF),
               ],
             ),
           ),

@@ -36,23 +36,23 @@ class _QuizOver extends State<QuizOver> {
                   Container(
                     child:Text('竞赛结束',style: TextStyle(
                       fontSize: 30,
-                      color: Colors.green
+                      color: Colors.blue
                       ),
                     ),
-                    margin: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0)
+                    margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0)
                   ),
                   Container(
                     child:Text('您的分数为：$_score',style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.green
+                      fontSize: 20,
+                      color: Colors.black
                       ),
                     ),
                     margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0)
                   ),
                   Container(
                     child:Text('所花时间为：${_seconds}s',style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.green
+                      fontSize: 20,
+                      color: Colors.black
                       ),
                     ),
                     margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 50.0)
@@ -73,16 +73,15 @@ class _QuizOver extends State<QuizOver> {
                       decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           colors: <Color>[
-                            Color(0xff25D1D1),
-                            Color(0xff3BE6AD),
-                            Color(0xff20DDAA)
+                            Color(0xff6FB2FF),
+                            Color(0xff095FFF),
                           ],
                         ),
                       ),
                       padding: const EdgeInsets.all(10.0),
                       child: Container(
                         alignment: Alignment.center,
-                        child: Text('重新开始竞赛')),
+                        child: Text('重新开始')),
                     ),
                   )
                 ],

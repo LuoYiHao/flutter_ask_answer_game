@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: '竞赛开始',
       theme: new ThemeData(
-        primaryColor: Colors.redAccent,
+        primaryColor: Colors.blueAccent,
       ),
       home: BottomTabBar(),
     );
