@@ -62,10 +62,9 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
     });
   }
 
-  saveScoreAndStartTime() async{
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setDouble('score', _score);
-    prefs.setString('time', _time);
+  saveScoreAndStartTime(){
+    saveSharedPreferences('score', _score, 'double');
+    saveSharedPreferences('time', _time, 'String');
   }
 
   handleAnswerRight(){
