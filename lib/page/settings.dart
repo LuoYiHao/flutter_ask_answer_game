@@ -32,7 +32,6 @@ class _SettingsState extends State<Settings> {
               onChanged: (value){
                 setState(() {
                   isChangeQuizOrder = value;
-                  Global.isChangeQuizOrder = value;
                   saveSharedPreferences('isChangeQuizOrder', value, "bool");
                 });
               }
@@ -43,7 +42,6 @@ class _SettingsState extends State<Settings> {
               onChanged: (value){
                 setState(() {
                   isChangeOptionOrder = value;
-                  Global.isChangeOptionOrder = value;
                   saveSharedPreferences('isChangeOptionOrder', value, "bool");
                 });
               }
@@ -66,6 +64,44 @@ class _SettingsState extends State<Settings> {
                   );
                 }).toList(),
               )
+            ),
+            Container(
+              child: RaisedButton(
+                onPressed: (){
+                  setState(() {
+                    isChangeQuizOrder = true;
+                    isChangeOptionOrder = true;
+                    dropdownValue = 'all';
+                  });
+
+                  saveSharedPreferences('isChangeQuizOrder', isChangeQuizOrder, "bool");
+                  saveSharedPreferences('isChangeOptionOrder', isChangeOptionOrder, "bool");
+                  saveSharedPreferences("dropdownValue", dropdownValue, "String");
+                },
+                textColor: Colors.white,
+                clipBehavior: Clip.hardEdge,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(22.0))
+                ),
+                padding: const EdgeInsets.all(0.0),
+                child: Container(
+                  width: 260,
+                  height: 44,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: <Color>[
+                        Color(0xff6FB2FF),
+                        Color(0xff095FFF),
+                      ],
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text('重置默认设置')),
+                ),
+              ),
+              margin: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
             )
           ],
         ),
