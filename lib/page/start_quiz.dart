@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'ask_answer_quiz.dart';
-
+import 'package:flutter_ask_answer_game/common/common.dart';
+import 'package:flutter_ask_answer_game/common/global.dart';
 
 class StartQuiz extends StatefulWidget {
   @override
@@ -11,7 +12,12 @@ class _StartQuizState extends State<StartQuiz> {
   List list;
   @override
   void initState() {
-    list = list;
+    getSharedPreferences("isChangeQuizOrder","bool").then((isChangeQuizOrder){
+      Global.isChangeQuizOrder = isChangeQuizOrder;
+    });
+    getSharedPreferences("isChangeOptionOrder","bool").then((isChangeOptionOrder){
+      Global.isChangeOptionOrder = isChangeOptionOrder;
+    });
     super.initState();
   }
 

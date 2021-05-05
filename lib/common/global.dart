@@ -1,4 +1,4 @@
 class Global{
   static bool isChangeQuizOrder = true;
-  static bool isChangeOptionOrder = false;
+  static bool isChangeOptionOrder = true;
 }

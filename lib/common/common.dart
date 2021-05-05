@@ -50,18 +50,15 @@ getSharedPreferences(key,type) async{
   final prefs = await SharedPreferences.getInstance();
   switch(type){
     case 'bool':
-      final bool value = prefs.getBool(key) ?? true;
-      return value;
+      return prefs.getBool(key) ?? true;
   }
 }
 
-processData(arr) async{
-  var res;
-  bool isChangeQuizOrder = await getSharedPreferences('isChangeQuizOrder','bool');
-  if(isChangeQuizOrder){
-    res = shuffle(arr);
-  }else{
-    res = arr;
+saveSharedPreferences(key,val,type) async{
+  final prefs = await SharedPreferences.getInstance();
+  switch(type){
+    case 'bool':
+      prefs.setBool(key, val);
+      break;
   }
-  return res;
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ask_answer_game/common/common.dart';
 import 'package:flutter_ask_answer_game/common/global.dart';
 
 class Settings extends StatefulWidget {
@@ -24,6 +25,7 @@ class _SettingsState extends State<Settings> {
                 setState(() {
                   isChangeQuizOrder = value;
                   Global.isChangeQuizOrder = value;
+                  saveSharedPreferences('isChangeQuizOrder', value, "bool");
                 });
               }
             ),
@@ -34,6 +36,7 @@ class _SettingsState extends State<Settings> {
                 setState(() {
                   isChangeOptionOrder = value;
                   Global.isChangeOptionOrder = value;
+                  saveSharedPreferences('isChangeOptionOrder', value, "bool");
                 });
               }
             ),
