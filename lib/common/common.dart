@@ -48,6 +48,7 @@ shuffle(List arr){
 
 getSharedPreferences(key,type) async{
   final prefs = await SharedPreferences.getInstance();
+  type = type.toString().toLowerCase();
   switch(type){
     case 'bool':
       return prefs.getBool(key) ?? true;
@@ -62,6 +63,7 @@ getSharedPreferences(key,type) async{
 
 saveSharedPreferences(key,val,type) async{
   final prefs = await SharedPreferences.getInstance();
+  type = type.toString().toLowerCase();
   switch(type){
     case 'bool':
       prefs.setBool(key, val);

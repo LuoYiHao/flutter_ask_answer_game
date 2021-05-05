@@ -77,7 +77,7 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
         _radioVal = '';
       });
       
-      if(_count == list.length){
+      if(_count == list.length || (Global.dropdownValue != 'all' && _count == double.parse(Global.dropdownValue))){
         saveScoreAndStartTime();
         Navigator.of(context).push(MaterialPageRoute(builder: (_)=>QuizOver())).then((val)=>val?reload():null);
         setState(() {
@@ -114,8 +114,6 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
   @override
   void initState(){
     list = Global.isChangeQuizOrder?shuffle(arr):arr;
-    print('initState');
-    print(Global.isChangeQuizOrder);
     retsetCheckboxOptions();
   }
 
@@ -181,15 +179,11 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
         _optionList.add(tile);
       }
     }else if(problem['type']=='checkbox'){
-      print(_tmpCount);
-      print(_count);
       if(Global.isChangeOptionOrder && _tmpCount != _count){
         _tmpCount = _count;
         checkboxShuffleOptions = shuffle(_checkboxOptions);
         _checkboxOptions = List();
         for(var option in checkboxShuffleOptions){
-          print(option.title);
-          print(option.isRight);
           _checkboxOptions.add(option);
         }
       }
@@ -198,7 +192,6 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
           title: Text(option.title),
           value: option.isSelected, 
           onChanged: (value) {
-            print(value);
             setState(() {
               option.isSelected = value;
               if(option.isSelected){
@@ -221,7 +214,6 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
         margin: const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 0.0),
         child: RaisedButton(
           onPressed: (){
-            print(selName);
             if(confirmAnswer()){
               handleAnswerRight();
             }else{
@@ -240,9 +232,8 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: <Color>[
-                  Color(0xff25D1D1),
-                  Color(0xff3BE6AD),
-                  Color(0xff20DDAA)
+                  Color(0xff6FB2FF),
+                  Color(0xff095FFF),
                 ],
               ),
             ),

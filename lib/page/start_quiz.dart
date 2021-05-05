@@ -18,6 +18,9 @@ class _StartQuizState extends State<StartQuiz> {
     getSharedPreferences("isChangeOptionOrder","bool").then((isChangeOptionOrder){
       Global.isChangeOptionOrder = isChangeOptionOrder;
     });
+    getSharedPreferences("dropdownValue","String").then((dropdownValue){
+      Global.dropdownValue = dropdownValue;
+    });
     super.initState();
   }
 
