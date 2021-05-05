@@ -1,4 +1,5 @@
 import 'package:flutter_ask_answer_game/page/bottom_tab_bar.dart';
+import 'package:flutter_ask_answer_game/page/splash_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());
@@ -11,7 +12,10 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primaryColor: Colors.blueAccent,
       ),
-      home: BottomTabBar(),
+      home: SplashPage(),
+      routes: <String, WidgetBuilder>{ // 路由
+        '/HomePage': (BuildContext context) => new BottomTabBar()
+      },
     );
   }
 }

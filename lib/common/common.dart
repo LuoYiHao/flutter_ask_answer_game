@@ -51,6 +51,12 @@ getSharedPreferences(key,type) async{
   switch(type){
     case 'bool':
       return prefs.getBool(key) ?? true;
+    case 'int':
+      return prefs.getInt(key) ?? true;
+    case 'double':
+      return prefs.getDouble(key) ?? true;
+    case 'string':
+      return prefs.getString(key) ?? true;
   }
 }
 
@@ -59,6 +65,15 @@ saveSharedPreferences(key,val,type) async{
   switch(type){
     case 'bool':
       prefs.setBool(key, val);
+      break;
+    case 'int':
+      prefs.setInt(key, val);
+      break;
+    case 'double':
+      prefs.setDouble(key, val);
+      break;
+    case 'string':
+      prefs.setString(key, val);
       break;
   }
 }
