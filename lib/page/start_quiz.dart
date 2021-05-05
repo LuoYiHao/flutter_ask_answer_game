@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'ask_answer_quiz.dart';
+import 'dart:ui';
 import 'package:flutter_ask_answer_game/common/common.dart';
 import 'package:flutter_ask_answer_game/common/global.dart';
 
@@ -26,34 +27,62 @@ class _StartQuizState extends State<StartQuiz> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: RaisedButton(
-        onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (_)=>AskAnswerQuiz()));
-        },
-        textColor: Colors.white,
-        clipBehavior: Clip.hardEdge,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(22.0))
-        ),
-        padding: const EdgeInsets.all(0.0),
-        child: Container(
-          width: 260,
-          height: 44,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: <Color>[
-                Color(0xff6FB2FF),
-                Color(0xff095FFF),
-              ],
-            ),
+    return Scaffold(
+      body: Stack(
+        children: [
+          ConstrainedBox(
+            constraints: BoxConstraints.expand(),
+            child: Image.network('https://z3.ax1x.com/2021/05/05/gMWDC8.jpg'
+            ,fit: BoxFit.cover),
           ),
-          padding: const EdgeInsets.all(10.0),
-          child: Container(
-            alignment: Alignment.center,
-            child: Text('开始竞赛')),
-        )
-      )
+          Center(
+            child: ClipRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 3.0,sigmaY: 3.0),
+                child: Opacity(
+                  opacity: 0.7,
+                  child: Container(
+                    width: 500.0,
+                    height: 800.0,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200
+                    ),
+                    child: Center(
+                      child:RaisedButton(
+                        onPressed: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (_)=>AskAnswerQuiz()));
+                        },
+                        textColor: Colors.white,
+                        clipBehavior: Clip.hardEdge,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(22.0))
+                        ),
+                        padding: const EdgeInsets.all(0.0),
+                        child: Container(
+                          width: 260,
+                          height: 44,
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: <Color>[
+                                Color(0xff6FB2FF),
+                                Color(0xff095FFF),
+                              ],
+                            ),
+                          ),
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text('开始竞赛')),
+                        )
+                      )
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
