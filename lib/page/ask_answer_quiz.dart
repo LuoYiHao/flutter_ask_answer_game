@@ -145,10 +145,10 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
   }
 
   Widget showPic() {
-    var problem = list[_count];
-    if (problem['pic'] != null) {
+    var pic = list[_count]['pic'];
+    if (pic != null) {
       return Container(
-        child: Image.network(problem['pic']),
+        child: Image.network(pic),
         margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 20.0),
       );
     }
