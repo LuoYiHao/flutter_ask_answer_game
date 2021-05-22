@@ -41,6 +41,7 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
                       style: TextStyle(fontSize: 20, color: Colors.black)),
                   margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 20.0),
                 ),
+                showPic(),
                 Column(children: generateOptions()),
               ],
             )
@@ -143,16 +144,26 @@ class _AskAnswerQuiz extends State<AskAnswerQuiz> {
     return true;
   }
 
+  Widget showPic() {
+    var problem = list[_count];
+    if (problem['pic'] != null) {
+      return Container(
+        child: Image.network(problem['pic']),
+        margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 20.0),
+      );
+    }
+    return Container();
+  }
+
   List<Widget> generateOptions() {
     List<Widget> _optionList = [];
     var problem = list[_count];
     var _radioOptions = [];
+    Widget tile;
 
     if (problem['type'] == 'radio') {
       _radioOptions = problem['options'].split(",");
     }
-
-    Widget tile;
     if (problem['type'] == 'radio') {
       //打乱选项
       if (Global.isChangeOptionOrder) {
